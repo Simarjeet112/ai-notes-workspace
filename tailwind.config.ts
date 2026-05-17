@@ -62,6 +62,101 @@ const config: Config = {
         'glow-sm': '0 0 8px rgba(14, 165, 233, 0.3)',
         'glow-md': '0 0 16px rgba(14, 165, 233, 0.5)',
         'glow-lg': '0 0 24px rgba(14, 165, 233, 0.7)',
+        'glow-xl': '0 0 40px rgba(14, 165, 233, 0.9)',
+        'glow-purple': '0 0 24px rgba(168, 85, 247, 0.5)',
+        'glow-cyan': '0 0 24px rgba(6, 182, 212, 0.5)',
+      },
+      backgroundImage: {
+        'radial-gradient': 'radial-gradient(var(--tw-gradient-stops))',
+        'cinematic-glow': 'radial-gradient(800px at 50% 50%, rgba(14, 165, 233, 0.15) 0%, transparent 80%)',
+      },
+      animation: {
+        // Cinematic floating
+        'float-slow': 'float-slow 6s ease-in-out infinite',
+        'float-medium': 'float-medium 4s ease-in-out infinite',
+        'float-fast': 'float-fast 3s ease-in-out infinite',
+        
+        // Glow pulses
+        'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
+        'pulse-intense': 'pulse-intense 2s ease-in-out infinite',
+        
+        // Cinematic reveals
+        'reveal-up': 'reveal-up 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'reveal-down': 'reveal-down 1s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        'reveal-fade': 'reveal-fade 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+        
+        // Light rays
+        'shimmer': 'shimmer 2s ease-in-out infinite',
+        'light-ray': 'light-ray 3s ease-in-out infinite',
+        
+        // Cinematic depth
+        'depth-scale': 'depth-scale 3s ease-in-out infinite',
+        
+        // Atmospheric
+        'drift': 'drift 8s ease-in-out infinite',
+        'rotate-slow': 'rotate-slow 20s linear infinite',
+      },
+      keyframes: {
+        'float-slow': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        'float-medium': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-12px)' },
+        },
+        'float-fast': {
+          '0%, 100%': { transform: 'translateY(0px)' },
+          '50%': { transform: 'translateY(-8px)' },
+        },
+        'pulse-glow': {
+          '0%, 100%': { opacity: '0.5' },
+          '50%': { opacity: '1' },
+        },
+        'pulse-intense': {
+          '0%, 100%': { opacity: '0.7', boxShadow: '0 0 16px rgba(14, 165, 233, 0.5)' },
+          '50%': { opacity: '1', boxShadow: '0 0 40px rgba(14, 165, 233, 0.9)' },
+        },
+        'reveal-up': {
+          '0%': { opacity: '0', transform: 'translateY(30px) scale(0.95)' },
+          '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+        },
+        'reveal-down': {
+          '0%': { opacity: '0', transform: 'translateY(-30px) scale(0.95)' },
+          '100%': { opacity: '1', transform: 'translateY(0) scale(1)' },
+        },
+        'reveal-fade': {
+          '0%': { opacity: '0' },
+          '50%': { opacity: '0.5' },
+          '100%': { opacity: '1' },
+        },
+        'shimmer': {
+          '0%': { backgroundPosition: '-1000px 0' },
+          '100%': { backgroundPosition: '1000px 0' },
+        },
+        'light-ray': {
+          '0%, 100%': { opacity: '0.3', transform: 'scaleY(1)' },
+          '50%': { opacity: '0.6', transform: 'scaleY(1.1)' },
+        },
+        'depth-scale': {
+          '0%, 100%': { transform: 'scale(1)' },
+          '50%': { transform: 'scale(1.05)' },
+        },
+        'drift': {
+          '0%, 100%': { transform: 'translateX(0) translateY(0)' },
+          '25%': { transform: 'translateX(10px) translateY(-10px)' },
+          '50%': { transform: 'translateX(0) translateY(-20px)' },
+          '75%': { transform: 'translateX(-10px) translateY(-10px)' },
+        },
+        'rotate-slow': {
+          '0%': { transform: 'rotate(0deg)' },
+          '100%': { transform: 'rotate(360deg)' },
+        },
+      },
+      transitionTimingFunction: {
+        'cinematic': 'cubic-bezier(0.16, 1, 0.3, 1)',
+        'luxury': 'cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+        'smooth': 'cubic-bezier(0.4, 0.0, 0.2, 1)',
       },
     },
   },
@@ -86,6 +181,26 @@ const config: Config = {
     'rounded-2xl',
     'rounded-lg',
     'rounded-xl',
+    // Animation classes
+    'animate-float-slow',
+    'animate-float-medium',
+    'animate-float-fast',
+    'animate-pulse-glow',
+    'animate-pulse-intense',
+    'animate-reveal-up',
+    'animate-reveal-down',
+    'animate-reveal-fade',
+    'animate-light-ray',
+    'animate-depth-scale',
+    'animate-drift',
+    'animate-rotate-slow',
+    // Glow effects
+    'shadow-glow-sm',
+    'shadow-glow-md',
+    'shadow-glow-lg',
+    'shadow-glow-xl',
+    'shadow-glow-purple',
+    'shadow-glow-cyan',
   ],
 };
 
