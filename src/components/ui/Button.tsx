@@ -1,20 +1,15 @@
 /**
  * Component: Button
  * 
- * Premium button component with premium interactions.
+ * Premium button component with cinematic interactions.
  * 
- * Design philosophy:
- * - Minimalist (no heavy shadows, simple shapes)
- * - Magnetic (scales on hover, glow effect)
- * - Responsive (proper padding for touch targets)
- * - Accessible (clear focus states)
- * 
- * Why this approach?
- * 1. Smooth, 60fps animations
- * 2. Proper hover states (scale + glow)
- * 3. Pressing feedback (scale down)
- * 4. Dark mode optimized
- * 5. Type-safe sizing and variants
+ * Fixed in this version:
+ * - Proper gradient rendering
+ * - Visible hover effects
+ * - Better visual hierarchy
+ * - Improved loading state animation
+ * - Responsive sizing
+ * - Premium styling
  */
 
 'use client';
@@ -23,7 +18,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
 import { buttonTap } from '@lib/animations';
-import { motion as motionTokens } from '@design/tokens';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost';
@@ -34,26 +28,23 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantStyles = {
   primary: {
-    bg: 'bg-gradient-to-r from-primary-500 to-primary-600',
-    text: 'text-white',
-    hover: 'hover:shadow-glow-md',
+    base: 'bg-gradient-to-r from-blue-500 via-blue-600 to-cyan-500 text-white shadow-lg hover:shadow-blue-500/50',
+    hover: 'hover:shadow-xl hover:shadow-blue-500/60',
   },
   secondary: {
-    bg: 'bg-neutral-800 border border-neutral-700',
-    text: 'text-neutral-100',
-    hover: 'hover:border-neutral-600',
+    base: 'bg-neutral-800/50 border border-neutral-700 text-neutral-100 backdrop-blur-sm',
+    hover: 'hover:bg-neutral-700/50 hover:border-neutral-600',
   },
   ghost: {
-    bg: 'bg-transparent',
-    text: 'text-neutral-200 hover:text-white',
-    hover: 'hover:bg-neutral-800/50',
+    base: 'text-neutral-300 hover:text-white',
+    hover: 'hover:bg-neutral-800/30',
   },
 };
 
 const sizeStyles = {
-  sm: 'px-4 py-2 text-sm font-medium',
-  md: 'px-6 py-3 text-base font-medium',
-  lg: 'px-8 py-4 text-lg font-semibold',
+  sm: 'px-4 py-2 text-sm font-medium rounded-lg',
+  md: 'px-6 py-2.5 text-base font-medium rounded-lg',
+  lg: 'px-8 py-3.5 text-lg font-semibold rounded-xl',
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -65,23 +56,23 @@ export const Button: React.FC<ButtonProps> = ({
   children,
   ...props
 }) => {
-  const style = variantStyles[variant];
+  const variantStyle = variantStyles[variant];
+  const sizeStyle = sizeStyles[size];
 
   return (
     <motion.button
       variants={buttonTap}
       initial="rest"
-      whileHover="hover"
-      whileTap="tap"
+      whileHover={disabled ? {} : 'hover'}
+      whileTap={disabled ? {} : 'tap'}
       disabled={disabled || isLoading}
       className={clsx(
-        'relative rounded-lg font-medium transition-all duration-200',
-        'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500',
+        'relative font-medium transition-all duration-300',
+        'focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 focus:ring-offset-neutral-950',
         'disabled:opacity-50 disabled:cursor-not-allowed',
-        sizeStyles[size],
-        style.bg,
-        style.text,
-        style.hover,
+        sizeStyle,
+        variantStyle.base,
+        !disabled && variantStyle.hover,
         className
       )}
       {...props}
@@ -95,7 +86,7 @@ export const Button: React.FC<ButtonProps> = ({
           <div className="w-4 h-4 border-2 border-transparent border-t-current rounded-full" />
         </motion.span>
       )}
-      <span className={isLoading ? 'invisible' : ''}>{children}</span>
+      <span className={isLoading ? 'invisible' : 'visible'}>{children}</span>
     </motion.button>
   );
 };

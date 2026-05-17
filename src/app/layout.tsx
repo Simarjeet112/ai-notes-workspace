@@ -3,19 +3,23 @@ import { ReactNode } from 'react';
 import '@/styles/globals.css';
 
 export const metadata: Metadata = {
-  title: 'AI Notes Workspace',
-  description: 'Next-generation AI operating system for notes',
+  title: 'AI Notes - Next Generation Note-Taking with AI',
+  description: 'Experience the next-generation operating system for your thoughts. Where AI amplifies your creativity.',
+  viewport: 'width=device-width, initial-scale=1, maximum-scale=5',
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" />
+        <meta charSet="utf-8" />
+        <meta httpEquiv="x-ua-compatible" content="ie=edge" />
+        <link rel="icon" href="/favicon.ico" />
       </head>
-      <body className="bg-neutral-950 text-neutral-100">
-        {children}
+      <body className="bg-neutral-950 text-neutral-100 antialiased">
+        <div className="relative">
+          {children}
+        </div>
       </body>
     </html>
   );

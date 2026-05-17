@@ -1,26 +1,14 @@
 /**
  * Component: GlassCard
  * 
- * Reusable glassmorphism card component.
- * Foundation for all card-like UI elements.
- * 
- * Design approach:
- * - Subtle blur (8-12px) for glassmorphic effect
- * - Semi-transparent background (10-20% opacity)
- * - Thin border for definition
- * - Optional glow effect for emphasis
- * 
- * Why glassmorphism?
- * 1. Modern, premium aesthetic
- * 2. Implies depth/layering
- * 3. Suggests transparency/openness (AI is helpful, not hiding)
- * 4. Can be GPU-accelerated efficiently
- * 5. Works beautifully with dark mode
+ * Premium glassmorphism card component.
  * 
  * Fixed in this version:
- * - Proper motion component setup
- * - Correct whileHover syntax
- * - Safe box-shadow animations
+ * - Visible backdrop blur
+ * - Proper border rendering
+ * - Cinematic lighting effects
+ * - Better elevation hierarchy
+ * - Responsive padding
  */
 
 'use client';
@@ -37,19 +25,19 @@ interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
 
 const variantStyles = {
   default: {
-    bg: 'rgba(23, 23, 23, 0.4)',
-    border: '1px solid rgba(255, 255, 255, 0.1)',
-    blur: 'backdrop-blur-md',
+    bg: 'bg-white/5 backdrop-blur-md',
+    border: 'border border-white/10',
+    shadow: 'shadow-sm',
   },
   interactive: {
-    bg: 'rgba(23, 23, 23, 0.5)',
-    border: '1px solid rgba(14, 165, 233, 0.2)',
-    blur: 'backdrop-blur-lg',
+    bg: 'bg-white/8 backdrop-blur-lg',
+    border: 'border border-white/15',
+    shadow: 'shadow-md',
   },
   elevated: {
-    bg: 'rgba(23, 23, 23, 0.6)',
-    border: '1px solid rgba(14, 165, 233, 0.3)',
-    blur: 'backdrop-blur-xl',
+    bg: 'bg-white/10 backdrop-blur-xl',
+    border: 'border border-cyan-400/20',
+    shadow: 'shadow-lg',
   },
 };
 
@@ -65,23 +53,14 @@ export const GlassCard: React.FC<GlassCardProps> = ({
   return (
     <motion.div
       className={clsx(
-        'rounded-xl p-6 transition-shadow duration-300',
-        style.blur,
-        glow && 'shadow-glow-md hover:shadow-glow-lg',
+        'rounded-2xl p-6 transition-all duration-300',
+        style.bg,
+        style.border,
+        style.shadow,
+        glow && 'shadow-cyan-500/20 hover:shadow-cyan-500/40',
         className
       )}
-      style={{
-        backgroundColor: style.bg,
-        borderColor: style.border,
-        borderWidth: '1px',
-      }}
-      whileHover={
-        glow
-          ? {
-              boxShadow: '0 0 24px rgba(14, 165, 233, 0.6)',
-            }
-          : {}
-      }
+      whileHover={glow ? { scale: 1.01 } : {}}
       transition={{ duration: 0.3 }}
       {...(props as any)}
     >

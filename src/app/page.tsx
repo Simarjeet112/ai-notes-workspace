@@ -1,26 +1,16 @@
 /**
  * Page: Landing / Homepage
  * 
- * This is the hero landing page - the first cinematic experience.
- * 
- * Architecture:
- * 1. Background: Gradient + Spotlight + Particles
- * 2. Navigation: Fixed navbar with glass effect
- * 3. Hero Section: Large typography + CTA
- * 4. Features Preview: Cards showing key capabilities
- * 5. Workspace Preview: 3D representation of the app
- * 
- * Why this structure?
- * - Immediate visual impact (background + hero)
- * - Clear value proposition (features)
- * - Social proof (preview)
- * - Simple CTA (single action focus)
+ * Premium cinematic landing page.
  * 
  * Fixed in this version:
- * - Client-side only rendering (client component)
- * - Proper animation timing
- * - Safe motion syntax
- * - Correct transition configurations
+ * - Proper section spacing and layout
+ * - Better visual hierarchy
+ * - Improved responsiveness
+ * - Cinematic typography
+ * - Visible gradient backgrounds
+ * - Premium animations
+ * - Better CTA placement
  */
 
 'use client';
@@ -39,22 +29,22 @@ const features = [
   {
     icon: '✨',
     title: 'AI-Powered Writing',
-    description: 'Generate summaries, extract insights, write faster',
+    description: 'Generate summaries, extract insights, write faster with intelligent assistance',
   },
   {
     icon: '⚡',
     title: 'Instant Search',
-    description: 'Find anything in milliseconds with fuzzy matching',
+    description: 'Find anything in milliseconds with fuzzy matching and smart indexing',
   },
   {
     icon: '🧠',
     title: 'Smart Organization',
-    description: 'Auto-categorize notes with intelligent tagging',
+    description: 'Auto-categorize notes with intelligent tagging and structure',
   },
   {
     icon: '🔗',
     title: 'Share & Collaborate',
-    description: 'Beautiful public pages, real-time sharing',
+    description: 'Beautiful public pages and real-time sharing with comments',
   },
 ];
 
@@ -63,16 +53,16 @@ export default function Home() {
     <main className="relative w-full min-h-screen overflow-hidden bg-neutral-950">
       {/* Background System */}
       <GradientBackground />
-      <Spotlight color="#0ea5e9" intensity={0.4} />
+      <Spotlight color="#0ea5e9" intensity={0.5} />
 
       {/* Navigation */}
       <Navbar />
 
       {/* Hero Section */}
-      <section className="relative w-full min-h-screen flex items-center justify-center px-6 pt-20">
-        <div className="absolute inset-0 -z-10 opacity-30">
-          {/* Animated grid background */}
-          <svg className="w-full h-full" style={{ opacity: 0.1 }}>
+      <section className="relative w-full min-h-screen flex items-center justify-center px-4 sm:px-6 pt-32 pb-20">
+        {/* Grid background */}
+        <div className="absolute inset-0 -z-10">
+          <svg className="w-full h-full" style={{ opacity: 0.08 }}>
             <defs>
               <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
                 <path d="M 40 0 L 0 0 0 40" fill="none" stroke="currentColor" strokeWidth="0.5" />
@@ -82,56 +72,57 @@ export default function Home() {
           </svg>
         </div>
 
-        <div className="relative z-10 max-w-4xl text-center">
+        <div className="relative z-10 max-w-5xl w-full text-center">
           {/* Main Heading */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            className="mb-6"
           >
-            <h1 className="text-6xl md:text-7xl font-bold tracking-tight mb-6">
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400">
+            <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight leading-tight">
+              <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-300">
                 AI Notes
               </span>
               <br />
-              Reimagined
+              <span className="text-white">Reimagined</span>
             </h1>
           </motion.div>
 
           {/* Subheading */}
           <motion.p
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-            className="text-xl text-neutral-300 mb-8 max-w-2xl mx-auto leading-relaxed"
+            transition={{ duration: 0.8, delay: 0.15, ease: [0.16, 1, 0.3, 1] }}
+            className="text-lg sm:text-xl md:text-2xl text-neutral-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light"
           >
             Experience the next-generation operating system for your thoughts. 
+            <br className="hidden sm:block" />
             Where AI doesn't just assist—it amplifies your creativity.
           </motion.p>
 
           {/* CTA Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+            transition={{ duration: 0.8, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12"
           >
-            <Button variant="primary" size="lg" className="px-8">
+            <Button variant="primary" size="lg" className="w-full sm:w-auto">
               Start Free Trial
             </Button>
-            <Button variant="secondary" size="lg" className="px-8">
+            <Button variant="secondary" size="lg" className="w-full sm:w-auto">
               View Demo
             </Button>
           </motion.div>
 
           {/* Floating Badge */}
           <motion.div
-            animate={{ y: [0, -8, 0] }}
+            animate={{ y: [0, -12, 0] }}
             transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            className="mt-12"
           >
             <GlassCard variant="interactive" className="inline-block">
-              <p className="text-sm text-neutral-300">
+              <p className="text-sm text-neutral-300 font-medium">
                 ✨ Trusted by 10,000+ creators & engineers
               </p>
             </GlassCard>
@@ -140,33 +131,33 @@ export default function Home() {
       </section>
 
       {/* Features Section */}
-      <section className="relative w-full py-20 px-6">
-        <div className="max-w-6xl mx-auto">
+      <section className="relative w-full py-24 px-4 sm:px-6">
+        <div className="max-w-7xl mx-auto">
           <motion.div
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             transition={{ duration: 0.8 }}
-            className="text-center mb-16"
+            viewport={{ once: true, margin: '-100px' }}
+            className="text-center mb-20"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-4">
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
               Supercharged by AI
             </h2>
-            <p className="text-neutral-400 text-lg max-w-2xl mx-auto">
+            <p className="text-neutral-400 text-lg md:text-xl max-w-2xl mx-auto font-light">
               Tools that understand you. Features that scale with your needs.
             </p>
           </motion.div>
 
-          <StaggerContainer>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <StaggerContainer delayChildren={0.1} staggerDelay={0.1}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {features.map((feature) => (
                 <motion.div key={feature.title} variants={staggerItem}>
-                  <GlassCard
-                    variant="interactive"
-                    className="h-full hover:border-primary-500/50 transition-colors"
-                  >
-                    <div className="text-4xl mb-3">{feature.icon}</div>
-                    <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
-                    <p className="text-neutral-400">{feature.description}</p>
+                  <GlassCard variant="interactive" className="h-full flex flex-col">
+                    <div className="text-5xl mb-4">{feature.icon}</div>
+                    <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
+                    <p className="text-neutral-400 text-sm leading-relaxed flex-grow">
+                      {feature.description}
+                    </p>
                   </GlassCard>
                 </motion.div>
               ))}
@@ -176,21 +167,21 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative w-full py-20 px-6">
+      <section className="relative w-full py-24 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="text-center"
+            viewport={{ once: true, margin: '-100px' }}
           >
             <GlassCard variant="elevated" glow className="text-center">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4">
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
                 Ready to transform your note-taking?
               </h2>
-              <p className="text-neutral-300 mb-8 text-lg">
+              <p className="text-neutral-300 mb-10 text-lg md:text-xl font-light">
                 Join thousands of creators using AI Notes to capture and
-                organize their best ideas.
+                organize their best ideas. Start free, no credit card required.
               </p>
               <Button variant="primary" size="lg">
                 Start Your Free Trial →
@@ -199,6 +190,9 @@ export default function Home() {
           </motion.div>
         </div>
       </section>
+
+      {/* Footer Spacing */}
+      <div className="h-12" />
     </main>
   );
 }
