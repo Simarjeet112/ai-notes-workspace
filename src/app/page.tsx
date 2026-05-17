@@ -9,6 +9,14 @@ import { GlassCard } from '@components/ui/GlassCard';
 import { Button } from '@components/ui/Button';
 import { StaggerContainer } from '@components/animations/StaggerContainer';
 import { staggerItem } from '@lib/animations';
+import { useParallax, useDepthScroll } from '@lib/animations/cinematic';
+import dynamic from 'next/dynamic';
+
+// Lazy load heavy 3D component
+const HeroScene = dynamic(
+  () => import('@components/effects/HeroScene').then((mod) => mod.default),
+  { ssr: false }
+);
 
 const features = [
   {
@@ -34,8 +42,11 @@ const features = [
 ];
 
 export default function Home() {
+  const parallax = useParallax(30);
+  const depth = useDepthScroll();
+
   return (
-    <main className="relative w-full min-h-screen bg-neutral-950">
+    <main className="relative w-full min-h-screen bg-neutral-950 overflow-hidden">
       {/* Background Effects */}
       <GradientBackground />
       <Spotlight color="#0ea5e9" intensity={0.5} />
@@ -43,8 +54,14 @@ export default function Home() {
       {/* Navigation */}
       <Navbar />
 
-      {/* Hero Section */}
+      {/* Hero Section with 3D */}
       <section className="relative w-full min-h-screen flex items-center justify-center px-4 pt-32">
+        {/* 3D Background Scene */}
+        <div className="absolute inset-0 -z-10">
+          <HeroScene />
+        </div>
+
+        {/* Grid background overlay */}
         <div className="absolute inset-0 -z-10 overflow-hidden">
           <svg className="w-full h-full opacity-5" preserveAspectRatio="none">
             <defs>
@@ -56,7 +73,14 @@ export default function Home() {
           </svg>
         </div>
 
-        <div className="relative z-10 max-w-5xl text-center">
+        {/* Content overlay */}
+        <div
+          className="relative z-10 max-w-5xl text-center"
+          style={{
+            transform: `translateY(${depth.opacity * 50}px)`,
+            opacity: depth.opacity,
+          }}
+        >
           {/* Main Heading */}
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -130,7 +154,7 @@ export default function Home() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {features.map((feature) => (
                 <motion.div key={feature.title} variants={staggerItem}>
-                  <GlassCard variant="interactive" className="h-full flex flex-col">
+                  <GlassCard variant="interactive" className="h-full flex flex-col hover:scale-105 transition-transform duration-300">
                     <div className="text-5xl mb-4">{feature.icon}</div>
                     <h3 className="text-xl font-semibold mb-3 text-white">{feature.title}</h3>
                     <p className="text-neutral-400 text-sm leading-relaxed flex-grow">{feature.description}</p>
