@@ -1,22 +1,3 @@
-/**
- * Component: Spotlight
- * 
- * Cinematic spotlight effect that follows mouse.
- * Creates sense of depth and interactivity.
- * 
- * Implementation:
- * - SVG-based (lightweight, scalable)
- * - Mouse-reactive position
- * - Feathered edges for smooth falloff
- * - Animated glow
- * 
- * Fixed in this version:
- * - Proper client-side rendering
- * - Hydration-safe implementation
- * - Correct SVG opacity attributes
- * - Type-safe color handling
- */
-
 'use client';
 
 import React, { useEffect, useState } from 'react';
@@ -41,7 +22,6 @@ export const Spotlight: React.FC<SpotlightProps> = ({
 
   useEffect(() => {
     if (!isMounted) return;
-    
     setPosition({
       x: (mouse.x + 1) * 50,
       y: (mouse.y + 1) * 50,
@@ -53,12 +33,7 @@ export const Spotlight: React.FC<SpotlightProps> = ({
   }
 
   return (
-    <svg
-      className="fixed inset-0 w-full h-full -z-10 pointer-events-none"
-      style={{
-        filter: `drop-shadow(0 0 80px ${color}33)`,
-      }}
-    >
+    <svg className="fixed inset-0 w-full h-full -z-10 pointer-events-none" style={{ filter: `drop-shadow(0 0 80px ${color}33)` }}>
       <defs>
         <radialGradient id="spotlight-gradient">
           <stop offset="0%" stopColor={color} stopOpacity={intensity * 0.4} />

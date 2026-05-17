@@ -2,12 +2,13 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-/* Font Import */
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
-/* ============================================================================
-   GLOBAL TYPOGRAPHY & FOUNDATION
-   ============================================================================ */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
 html {
   -webkit-font-smoothing: antialiased;
@@ -19,89 +20,56 @@ html {
 body {
   background-color: #0a0a0a;
   color: #fafafa;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Roboto,
-    sans-serif;
-  font-size: 16px;
-  line-height: 1.5;
-  letter-spacing: 0em;
-  font-weight: 400;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', 'Inter', sans-serif;
+  line-height: 1.6;
 }
 
-/* Headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 700;
+/* Typography */
+h1 {
+  font-size: clamp(2.25rem, 8vw, 4.5rem);
+  font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.02em;
 }
 
-h1 {
-  font-size: 48px;
-  line-height: 52px;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.5rem;
-}
-
-@media (min-width: 768px) {
-  h1 {
-    font-size: 64px;
-    line-height: 68px;
-  }
-}
-
-@media (min-width: 1024px) {
-  h1 {
-    font-size: 72px;
-    line-height: 80px;
-  }
-}
-
 h2 {
-  font-size: 36px;
-  line-height: 40px;
-  margin-bottom: 1rem;
-}
-
-@media (min-width: 768px) {
-  h2 {
-    font-size: 48px;
-    line-height: 52px;
-  }
+  font-size: clamp(1.875rem, 5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.3;
+  letter-spacing: -0.015em;
 }
 
 h3 {
-  font-size: 30px;
-  line-height: 36px;
+  font-size: 1.875rem;
+  font-weight: 700;
+  line-height: 1.3;
 }
 
 h4 {
-  font-size: 24px;
-  line-height: 32px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 h5 {
-  font-size: 20px;
-  line-height: 28px;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
 }
 
 h6 {
-  font-size: 16px;
-  line-height: 24px;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
-/* Body Text */
 p {
-  margin-bottom: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #d4d4d4;
 }
 
-/* ============================================================================
-   SCROLLBAR STYLING
-   ============================================================================ */
-
+/* Scrollbar */
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -121,10 +89,7 @@ p {
   background: #525252;
 }
 
-/* ============================================================================
-   SELECTION & FOCUS STATES
-   ============================================================================ */
-
+/* Selection */
 ::selection {
   background-color: rgba(14, 165, 233, 0.3);
   color: #fafafa;
@@ -135,15 +100,24 @@ p {
   color: #fafafa;
 }
 
+/* Focus */
 *:focus-visible {
   outline: 2px solid #0ea5e9;
   outline-offset: 2px;
 }
 
-/* ============================================================================
-   BUTTON RESET
-   ============================================================================ */
+/* Links */
+a {
+  color: #0ea5e9;
+  text-decoration: none;
+  transition: color 0.2s ease-out;
+}
 
+a:hover {
+  color: #38bdf8;
+}
+
+/* Buttons */
 button {
   -webkit-appearance: none;
   appearance: none;
@@ -159,36 +133,17 @@ button:disabled {
   opacity: 0.5;
 }
 
-/* ============================================================================
-   LINK STYLING
-   ============================================================================ */
-
-a {
-  color: #0ea5e9;
-  text-decoration: none;
-  transition: color 0.2s ease-out;
-}
-
-a:hover {
-  color: #38bdf8;
-}
-
-/* ============================================================================
-   INPUT RESET
-   ============================================================================ */
-
+/* Inputs */
 input,
 textarea,
 select {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
+  color: inherit;
 }
 
-/* ============================================================================
-   UTILITY CLASSES
-   ============================================================================ */
-
+/* Utility Classes */
 .text-gradient {
   background: linear-gradient(135deg, #0ea5e9 0%, #a855f7 100%);
   background-clip: text;
@@ -196,110 +151,16 @@ select {
   -webkit-text-fill-color: transparent;
 }
 
-.glow-sm {
-  box-shadow: 0 0 8px rgba(14, 165, 233, 0.3);
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.glow-md {
-  box-shadow: 0 0 16px rgba(14, 165, 233, 0.5);
+.glow-blue {
+  box-shadow: 0 0 24px rgba(14, 165, 233, 0.4);
 }
 
-.glow-lg {
-  box-shadow: 0 0 24px rgba(14, 165, 233, 0.7);
-}
-
-/* ============================================================================
-   ANIMATION KEYFRAMES
-   ============================================================================ */
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-
-@keyframes slideUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.95);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-@keyframes float {
-  0%,
-  100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-8px);
-  }
-}
-
-@keyframes pulse {
-  0%,
-  100% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 0.5;
-  }
-}
-
-@keyframes spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* ============================================================================
-   RESPONSIVE UTILITIES
-   ============================================================================ */
-
-@media (max-width: 640px) {
-  h1 {
-    font-size: 36px;
-    line-height: 40px;
-  }
-
-  h2 {
-    font-size: 28px;
-    line-height: 32px;
-  }
-
-  h3 {
-    font-size: 24px;
-    line-height: 28px;
-  }
+.glow-purple {
+  box-shadow: 0 0 24px rgba(168, 85, 247, 0.4);
 }
