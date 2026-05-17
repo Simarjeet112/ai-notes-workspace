@@ -17,10 +17,13 @@
  * 5. Type-safe sizing and variants
  */
 
+'use client';
+
 import React from 'react';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
-import { buttonTap, glow as glowAnimation } from '@lib/animations';
+import { buttonTap } from '@lib/animations';
+import { motion as motionTokens } from '@design/tokens';
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: 'primary' | 'secondary' | 'ghost';

@@ -10,13 +10,15 @@
  * 3. Easy to modify defaults globally
  * 4. Type-safe variant selection
  * 
- * Usage:
- * <MotionDiv variant="slideUp">
- *   Content here
- * </MotionDiv>
+ * Fixed in this version:
+ * - Proper variant type checking
+ * - Safe fallback to 'fadeIn'
+ * - Corrected delay handling
  */
 
-import React from 'react';
+'use client';
+
+import React, { useMemo } from 'react';
 import { motion, Variants } from 'framer-motion';
 import * as animations from '@lib/animations';
 
@@ -35,14 +37,17 @@ export const MotionDiv: React.FC<MotionDivProps> = ({
   animate = 'visible',
   ...props
 }) => {
-  const animationVariants = animations[variant] as Variants;
+  const animationVariants = useMemo(() => {
+    const variants = animations[variant as AnimationVariant] as Variants | undefined;
+    return variants || (animations.fadeIn as Variants);
+  }, [variant]);
 
   return (
     <motion.div
       initial={initial}
       animate={animate}
       variants={animationVariants}
-      transition={delay ? { delay } : undefined}
+      transition={delay > 0 ? { delay } : undefined}
       {...props}
     >
       {children}

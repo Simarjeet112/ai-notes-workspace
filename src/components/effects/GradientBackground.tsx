@@ -14,10 +14,17 @@
  * - Gradients shift based on mouse position
  * - Creates depth/parallax effect
  * - Subtle (not distracting)
+ * 
+ * Fixed in this version:
+ * - Removed conflicting background/backgroundColor properties
+ * - Uses only backgroundImage property
+ * - Proper style object typing
+ * - Hydration-safe rendering
  */
 
+'use client';
+
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
 import { useMouseMove } from '@lib/animations/useMouseMove';
 
 export const GradientBackground: React.FC = () => {
@@ -36,17 +43,17 @@ export const GradientBackground: React.FC = () => {
   const gradientY = 50 + mouse.y * 5;
 
   return (
-    <motion.div
-      className="fixed inset-0 -z-20"
+    <div
+      className="fixed inset-0 -z-20 pointer-events-none"
       style={{
-        background: `radial-gradient(
+        backgroundImage: `radial-gradient(
           ellipse at ${gradientX}% ${gradientY}%,
           rgba(14, 165, 233, 0.15) 0%,
           rgba(168, 85, 247, 0.1) 25%,
           transparent 50%
-        )`,
+        ), radial-gradient(at 50% 50%, rgba(10, 10, 10, 1) 0%, transparent 100%)`,
         backgroundColor: '#0a0a0a',
-        transition: 'background 0.1s ease-out',
+        transition: 'background-image 0.1s ease-out',
       }}
     />
   );

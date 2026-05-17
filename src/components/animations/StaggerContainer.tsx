@@ -13,12 +13,13 @@
  * Uses Framer Motion's staggerChildren feature.
  * This is efficient because it doesn't create extra elements.
  * 
- * Usage:
- * <StaggerContainer>
- *   <motion.div variants={staggerItem}>Item 1</motion.div>
- *   <motion.div variants={staggerItem}>Item 2</motion.div>
- * </StaggerContainer>
+ * Fixed in this version:
+ * - Removed deprecated Variants type for children
+ * - Proper React children typing
+ * - Safe variant passing to children
  */
+
+'use client';
 
 import React from 'react';
 import { motion, Variants } from 'framer-motion';

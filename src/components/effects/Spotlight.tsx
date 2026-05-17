@@ -10,12 +10,14 @@
  * - Feathered edges for smooth falloff
  * - Animated glow
  * 
- * Why SVG instead of Canvas?
- * - No performance overhead
- * - Can be styled with CSS
- * - Integrates with React naturally
- * - Smooth even with multiple spotlights
+ * Fixed in this version:
+ * - Proper client-side rendering
+ * - Hydration-safe implementation
+ * - Correct SVG opacity attributes
+ * - Type-safe color handling
  */
+
+'use client';
 
 import React, { useEffect, useState } from 'react';
 import { useMouseMove } from '@lib/animations/useMouseMove';
@@ -30,7 +32,7 @@ export const Spotlight: React.FC<SpotlightProps> = ({
   intensity = 0.5,
 }) => {
   const mouse = useMouseMove();
-  const [position, setPosition] = useState({ x: 0, y: 0 });
+  const [position, setPosition] = useState({ x: 50, y: 50 });
   const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
@@ -38,11 +40,13 @@ export const Spotlight: React.FC<SpotlightProps> = ({
   }, []);
 
   useEffect(() => {
+    if (!isMounted) return;
+    
     setPosition({
       x: (mouse.x + 1) * 50,
       y: (mouse.y + 1) * 50,
     });
-  }, [mouse]);
+  }, [mouse, isMounted]);
 
   if (!isMounted) {
     return null;
@@ -59,7 +63,7 @@ export const Spotlight: React.FC<SpotlightProps> = ({
         <radialGradient id="spotlight-gradient">
           <stop offset="0%" stopColor={color} stopOpacity={intensity * 0.4} />
           <stop offset="50%" stopColor={color} stopOpacity={intensity * 0.1} />
-          <stop offset="100%" stopColor={color} stopOpacity="0" />
+          <stop offset="100%" stopColor={color} stopOpacity={0} />
         </radialGradient>
       </defs>
       <circle

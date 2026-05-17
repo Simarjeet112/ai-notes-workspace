@@ -17,22 +17,41 @@
  * 4. Can be GPU-accelerated efficiently
  * 5. Works beautifully with dark mode
  * 
- * Performance note:
- * - Uses backdrop-filter (GPU accelerated)
- * - Border and shadow don't force layout recalculations
- * - Safe to animate opacity
+ * Fixed in this version:
+ * - Proper motion component setup
+ * - Correct whileHover syntax
+ * - Safe box-shadow animations
  */
+
+'use client';
 
 import React from 'react';
 import { motion } from 'framer-motion';
 import { clsx } from 'clsx';
-import { colors } from '@design/tokens';
 
 interface GlassCardProps extends React.HTMLAttributes<HTMLDivElement> {
   variant?: 'default' | 'interactive' | 'elevated';
   glow?: boolean;
   children: React.ReactNode;
 }
+
+const variantStyles = {
+  default: {
+    bg: 'rgba(23, 23, 23, 0.4)',
+    border: '1px solid rgba(255, 255, 255, 0.1)',
+    blur: 'backdrop-blur-md',
+  },
+  interactive: {
+    bg: 'rgba(23, 23, 23, 0.5)',
+    border: '1px solid rgba(14, 165, 233, 0.2)',
+    blur: 'backdrop-blur-lg',
+  },
+  elevated: {
+    bg: 'rgba(23, 23, 23, 0.6)',
+    border: '1px solid rgba(14, 165, 233, 0.3)',
+    blur: 'backdrop-blur-xl',
+  },
+};
 
 export const GlassCard: React.FC<GlassCardProps> = ({
   variant = 'default',
@@ -41,24 +60,6 @@ export const GlassCard: React.FC<GlassCardProps> = ({
   children,
   ...props
 }) => {
-  const variantStyles = {
-    default: {
-      bg: 'rgba(23, 23, 23, 0.4)',
-      border: '1px solid rgba(255, 255, 255, 0.1)',
-      blur: 'backdrop-blur-md',
-    },
-    interactive: {
-      bg: 'rgba(23, 23, 23, 0.5)',
-      border: '1px solid rgba(14, 165, 233, 0.2)',
-      blur: 'backdrop-blur-lg',
-    },
-    elevated: {
-      bg: 'rgba(23, 23, 23, 0.6)',
-      border: '1px solid rgba(14, 165, 233, 0.3)',
-      blur: 'backdrop-blur-xl',
-    },
-  };
-
   const style = variantStyles[variant];
 
   return (
@@ -74,8 +75,15 @@ export const GlassCard: React.FC<GlassCardProps> = ({
         borderColor: style.border,
         borderWidth: '1px',
       }}
-      whileHover={glow ? { boxShadow: '0 0 24px rgba(14, 165, 233, 0.6)' } : {}}
-      {...props}
+      whileHover={
+        glow
+          ? {
+              boxShadow: '0 0 24px rgba(14, 165, 233, 0.6)',
+            }
+          : {}
+      }
+      transition={{ duration: 0.3 }}
+      {...(props as any)}
     >
       {children}
     </motion.div>

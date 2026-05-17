@@ -15,6 +15,12 @@
  * - Clear value proposition (features)
  * - Social proof (preview)
  * - Simple CTA (single action focus)
+ * 
+ * Fixed in this version:
+ * - Client-side only rendering (client component)
+ * - Proper animation timing
+ * - Safe motion syntax
+ * - Correct transition configurations
  */
 
 'use client';
@@ -27,7 +33,7 @@ import { Spotlight } from '@components/effects/Spotlight';
 import { GlassCard } from '@components/ui/GlassCard';
 import { Button } from '@components/ui/Button';
 import { StaggerContainer } from '@components/animations/StaggerContainer';
-import { staggerItem, slideUp } from '@lib/animations';
+import { staggerItem } from '@lib/animations';
 
 const features = [
   {
@@ -41,7 +47,7 @@ const features = [
     description: 'Find anything in milliseconds with fuzzy matching',
   },
   {
-    icon: '🎯',
+    icon: '🧠',
     title: 'Smart Organization',
     description: 'Auto-categorize notes with intelligent tagging',
   },
@@ -54,7 +60,7 @@ const features = [
 
 export default function Home() {
   return (
-    <main className="relative w-full min-h-screen overflow-hidden">
+    <main className="relative w-full min-h-screen overflow-hidden bg-neutral-950">
       {/* Background System */}
       <GradientBackground />
       <Spotlight color="#0ea5e9" intensity={0.4} />
@@ -81,7 +87,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: 'easeOut' }}
+            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
             <h1 className="text-6xl md:text-7xl font-bold tracking-tight mb-6">
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary-400 to-accent-400">
@@ -96,7 +102,7 @@ export default function Home() {
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
+            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             className="text-xl text-neutral-300 mb-8 max-w-2xl mx-auto leading-relaxed"
           >
             Experience the next-generation operating system for your thoughts. 
@@ -107,7 +113,7 @@ export default function Home() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: 'easeOut' }}
+            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
             className="flex flex-col sm:flex-row gap-4 justify-center items-center"
           >
             <Button variant="primary" size="lg" className="px-8">

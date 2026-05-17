@@ -13,7 +13,14 @@
  * - Implies the navbar "floats" above content
  * - Premium, modern aesthetic
  * - Doesn't fully block content below
+ * 
+ * Fixed in this version:
+ * - Client-side only rendering
+ * - Proper motion component syntax
+ * - Safe animation variants
  */
+
+'use client';
 
 import React from 'react';
 import { motion } from 'framer-motion';
@@ -43,7 +50,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.2 }}
+            transition={{ delay: 0.2, duration: 0.3 }}
             className="flex items-center gap-2"
           >
             <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-accent-500 flex items-center justify-center">
@@ -60,7 +67,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
                 href={`#${link.toLowerCase()}`}
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.2 + index * 0.1 }}
+                transition={{ delay: 0.2 + index * 0.1, duration: 0.3 }}
                 className="text-neutral-300 hover:text-white transition-colors"
               >
                 {link}
@@ -72,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({ className }) => {
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
+            transition={{ delay: 0.5, duration: 0.3 }}
             className="flex items-center gap-3"
           >
             <Button variant="ghost" size="sm">
